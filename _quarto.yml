@@ -3,17 +3,19 @@ project:
   output-dir: docs
 
 website:
-  title: "Sociology_R_Data_analysis"
+  title: "Статистика, R и социология"
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/AlexRforScience
+      - icon: telegram
+        href: https://t.me/Cyber_marginal_671
 format:
   html:
-    theme: cosmo
+    theme:
+      light: default
+      dark: darkly
     css: styles.css
 
 editor: visual
