@@ -17,7 +17,6 @@ execute:
   message: fals
 ---
 
-<img src="531502-tyan-8.jpg" alt="Описание изображения" style="max-width: 50%; height: auto;">
 
 # Таблица
 
