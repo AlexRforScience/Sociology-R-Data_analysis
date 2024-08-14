@@ -1,6 +1,5 @@
 ---
 title: "Введение в азы Quarto"
-author: "Мелихов Александр"
 image: "531502-tyan-8.jpg"
 format:
   html:
@@ -15,8 +14,8 @@ crossref:
 execute: 
   warning: false
   message: fals
+date: today
 ---
-
 
 # Таблица
 
