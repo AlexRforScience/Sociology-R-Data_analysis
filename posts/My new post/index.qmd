@@ -14,7 +14,7 @@ crossref:
 execute: 
   warning: false
   message: fals
-date: today
+date: 08.10.2024
 categories: [Quarto]
 ---
 
