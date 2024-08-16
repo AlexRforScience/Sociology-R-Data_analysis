@@ -215,6 +215,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#среднее-арифметическое" id="toc-среднее-арифметическое" class="nav-link" data-scroll-target="#среднее-арифметическое"><span class="header-section-number">2.1</span> Среднее арифметическое</a></li>
   <li><a href="#среднее-усеченное" id="toc-среднее-усеченное" class="nav-link" data-scroll-target="#среднее-усеченное"><span class="header-section-number">2.2</span> Среднее усеченное</a></li>
+  <li><a href="#среднее-взешанное" id="toc-среднее-взешанное" class="nav-link" data-scroll-target="#среднее-взешанное"><span class="header-section-number">2.3</span> Среднее взешанное</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -232,7 +233,7 @@ window.Quarto = {
 </section>
 <section id="способы-нахождения" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Способы нахождения</h1>
-<p>Все студенты, проходящие курс математической статистики, знакомы с самимы основными, а заодно и с наиболее часто применяемыми, методами поиска меры центральной тенденции, а именно со средним арифметическим и медианой. Если же дело доходит до анализа качественных признаков, например уровня образования, то используется мода.</p>
+<p>Все студенты, проходящие курс математической статистики, знакомы с самыми основными, а заодно и с наиболее часто применяемыми, методами поиска меры центральной тенденции, а именно со средним арифметическим и медианой. Если же дело доходит до анализа качественных признаков, например уровня образования, то используется мода.</p>
 <p>Соответственно, вероятно читателю известно и то, в каких случаях уместно использовать среднее арифметическое, а в каких медиану. Для качественных признаков говорить о нормальности распределения или наличии выбросов обычно не приходится, так что все смело используют моду. В данном посте своего блога я хочу показать, как искать меру центральной тенденции переменной в R, при этом постараюсь максимально кратко расписать все нюансы и не ограничиться только средним арифметическим, медианой и модой.</p>
 <section id="среднее-арифметическое" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="среднее-арифметическое"><span class="header-section-number">2.1</span> Среднее арифметическое</h2>
@@ -262,7 +263,7 @@ window.Quarto = {
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
-<p>Во время исследования мы редко работает с отдельными переменными. Как правило, нам предстоит работать с таблицами данных. Возьмем например встроенные данные о автомобилях mtcars и перезапишем их в отдельный data frame, после чего посмотрим структуру:</p>
+<p>Во время исследования мы редко работает с отдельными переменными. Как правило, нам предстоит работать с таблицами данных. Возьмем, например, встроенные данные об автомобилях mtcars и перезапишем их в отдельный data frame, после чего посмотрим структуру:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mtcars</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -294,7 +295,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># с помощью tidyverse (dplyr)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># с помощью tidyverse (пакет dplyr)</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(vs) <span class="sc">%&gt;%</span> <span class="co"># группируем по переменной vs</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(hp))</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="co"># в итоге получаем среднее hp для всех значений vs </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -315,7 +316,7 @@ window.Quarto = {
 2:  1  91.35714</code></pre>
 </div>
 </div>
-<p>Интересно здесь то, что полученные значения средних <code>hp</code> для значений 0 и 1 столбца <code>vs</code> выводятся не в виде вектора с одним значением, как было в mean(df$hp), а в формате “data.frame” в случае с tidyverse, и “data.table/data.frame” в случае использования пакета data.table.</p>
+<p>Интересно здесь то, что полученные значения средних <code>hp</code> для значений 0 и 1 столбца <code>vs</code> выводятся не в виде вектора с одним значением, как было в mean(df$hp), а в формате “tibble” в случае с tidyverse, и “data.table” в случае использования пакета data.table.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mean_hp1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -326,22 +327,25 @@ window.Quarto = {
 <pre><code>[1] "data.table" "data.frame"</code></pre>
 </div>
 </div>
-<p>Как было показано выше, найти среднее достаточно легко. Однако данный способ имеет серьезные проблемы, которые даже отразились в народном анекдоте: “Чиновники едят мясо, а я капусту, в среднем мы едим голубцы”! Иными словами, если изучаемый объект имеет выбросы, то показатель среднего будет искажен. Так если он такой неустойчивый, то есть ли смысл считать среднее, или всегда стоит отдавать предпочтение более робастым (устойчивым) способам поиска меры центральной тенденции? На самом деле это очень хороший вопрос, на практике стоит считать как среднее, так и, например, медиану. При этом если звезды сойдутся, то среднее арифметическое будет наилучшим показателем, так как в своем рассчете учитывает все наблюдения, что в определенных ситуациях может быть очень важным. Далее мною будут рассмотрены еще два “средних”, а именно среднее усеченное и среднее взвешенное.</p>
+<p>Как было показано выше, найти среднее достаточно легко. Однако данный способ имеет серьезные проблемы, которые даже отразились в народном анекдоте: “Чиновники едят мясо, а я капусту, в среднем мы едим голубцы”! Иными словами, если изучаемый объект имеет выбросы, то показатель среднего будет искажен. Так если он такой неустойчивый, то есть ли смысл считать среднее, или всегда стоит отдавать предпочтение более робастным (устойчивым) способам поиска меры центральной тенденции? На самом деле это очень хороший вопрос, на практике стоит считать как среднее, так и, например, медиану. При этом если звезды сойдутся, то среднее арифметическое будет наилучшим показателем, так как в своем расчете учитывает все наблюдения, что в определенных ситуациях может быть очень важным. Далее мною будут рассмотрены еще два “средних”, а именно среднее усеченное и среднее взвешенное</p>
 </section>
 <section id="среднее-усеченное" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="среднее-усеченное"><span class="header-section-number">2.2</span> Среднее усеченное</h2>
-<p>Среднее усеченное - это более робастая оценка меры центральной тенденции, так как оно не учитывает наличие экстремально высоких или низких значений. Среднее усеченное отбрасывает фиксированное число сортированных значений с начала и конца последовательности значений изучаемого признака. Формула усеченного среднего: <span class="math display">\[
-\bar{x} = \frac{\sum_{i=p+1}^{n-p} x_i}{n-2p}
-\]</span></p>
+<p>Среднее усеченное — это более робастная оценка меры центральной тенденции, так как она не учитывает наличие экстремально высоких или низких значений. Среднее усеченное отбрасывает фиксированное число сортированных значений с начала и конца последовательности значений изучаемого признака. Формула усеченного среднего: <span class="math display">\[
+\bar{x} = \frac{\sum_{i=p+1}^{n-p} x_i}{n-2p}\]</span></p>
 <p>В R усеченное среднее рассчитывается следующим образом:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">100</span>, <span class="sc">-</span><span class="dv">80</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="fl">0.3333</span>) <span class="co"># через trim задаем диапазон значений, которые не учавствуют в рассчете</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="fl">0.3333</span>) <span class="co"># через trim задаем процент значений, которые не учавствуются в расчете</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
-<p>Так, мы проигнорировали экстремально низкое значение -80 и экстремально высокое значение 100, из-за чего значение среднего равно 5, как и было в первом примере главы про среднее арифметическое.</p>
+<p>Так, мы проигнорировали экстремально низкое значение -80 и экстремально высокое значение 100, из-за чего значение среднего равно 5, как и было в первом примере главы про среднее арифметическое. Проблема среднего усеченного в том, что нам нужно самостоятельно указать через значение trim, сколько процентов начала и конца мы не станем учитывать в расчете меры центральной тенденции. Чаще всего это значение останавливается на 10%, то есть <code>trim = 0.1</code>, однако на реальных данных нужно смотреть на распределение переменной.</p>
+</section>
+<section id="среднее-взешанное" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="среднее-взешанное"><span class="header-section-number">2.3</span> Среднее взешанное</h2>
+<p>Среднее взвешанное требует еще больше информации для его расчета, ведь каждое значение <span class="math inline">\(x_i\)</span> умножается на его вес <span class="math inline">\(w_i\)</span>. Формула среднего взвешанного выглядит так: <span class="math display">\[\bar{x_w} = \frac{\sum_{i=1}^{n} x_iw_i}{{\sum_{i}^{n}w_i}}\]</span></p>
 
 
 </section>
