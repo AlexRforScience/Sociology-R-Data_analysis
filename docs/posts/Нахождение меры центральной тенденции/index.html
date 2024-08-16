@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Мелихов Александр">
+<meta name="dcterms.date" content="2024-08-16">
 
-<title>Статистика, R и социология</title>
+<title>Мера центральной тенденции – Статистика, R и социология</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,29 +21,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -58,48 +90,19 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "Поиск не дал результатов",
-    "search-matching-documents-text": "Результаты поиска",
-    "search-copy-link-title": "Скопировать ссылку",
-    "search-hide-matches-text": "Скрыть дополнительные результаты",
-    "search-more-match-text": "дополнительный результат в этом документе",
-    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
-    "search-clear-button-title": "Очистить",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Отменить",
-    "search-submit-button-title": "Найти",
-    "search-label": "Поиск"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -131,7 +134,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -141,18 +144,18 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Статистика, R и социология</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Поиск"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">О блоге</span></a>
   </li>  
   <li class="nav-item compact">
@@ -168,7 +171,7 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -176,110 +179,175 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Статистика, R и социология</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Мера центральной тенденции</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Статистика</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Автор</div>
-      <div class="quarto-title-meta-contents">
-               <p>Мелихов Александр </p>
-            </div>
-    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 16, 2024</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Категории</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Все <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Статистика">Статистика <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#зачем" id="toc-зачем" class="nav-link active" data-scroll-target="#зачем"><span class="header-section-number">1</span> Зачем?</a></li>
+  <li><a href="#способы-нахождения" id="toc-способы-нахождения" class="nav-link" data-scroll-target="#способы-нахождения"><span class="header-section-number">2</span> Способы нахождения</a>
+  <ul class="collapse">
+  <li><a href="#среднее-арифметическое" id="toc-среднее-арифметическое" class="nav-link" data-scroll-target="#среднее-арифметическое"><span class="header-section-number">2.1</span> Среднее арифметическое</a></li>
+  <li><a href="#среднее-усеченное" id="toc-среднее-усеченное" class="nav-link" data-scroll-target="#среднее-усеченное"><span class="header-section-number">2.2</span> Среднее усеченное</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<section id="зачем" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Зачем?</h1>
+<p>Если мы собираемся проводить количественное исследование, то одним из неотъемлемых методов анализа данных является поиск меры центральной тенденции изучаемого признака. Казалось бы, что это не должно вызывать никаких трудностей у исследователей, однако (как это обычно бывает) не всё так однозначно.</p>
+</section>
+<section id="способы-нахождения" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Способы нахождения</h1>
+<p>Все студенты, проходящие курс математической статистики, знакомы с самимы основными, а заодно и с наиболее часто применяемыми, методами поиска меры центральной тенденции, а именно со средним арифметическим и медианой. Если же дело доходит до анализа качественных признаков, например уровня образования, то используется мода.</p>
+<p>Соответственно, вероятно читателю известно и то, в каких случаях уместно использовать среднее арифметическое, а в каких медиану. Для качественных признаков говорить о нормальности распределения или наличии выбросов обычно не приходится, так что все смело используют моду. В данном посте своего блога я хочу показать, как искать меру центральной тенденции переменной в R, при этом постараюсь максимально кратко расписать все нюансы и не ограничиться только средним арифметическим, медианой и модой.</p>
+<section id="среднее-арифметическое" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="среднее-арифметическое"><span class="header-section-number">2.1</span> Среднее арифметическое</h2>
+<p>Среднее арифметическое, или же просто среднее (<em>mean</em>) очень популярный способ вычислить меру центральной тенденции. Среднее обозначается как <span style="text-decoration: overline;">x</span> и имеет следующую формулу: <span class="math display">\[
+\bar{x} = \frac{\sum_{i}^{n} x_i}{n}
+\]</span> Создадим переменную <code>x</code>, которая будет вектором числовых значений и найдем ее среднее арифметическое с помощью базовой функцией <code>mean()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>Если в переменной имеются пропущенные значения, то на выход мы получим <code>NA</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="cn">NA</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>Чтобы обойти данное ограничение, в коде мы должны указать <code>na.rm = TRUE</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="cn">NA</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>Во время исследования мы редко работает с отдельными переменными. Как правило, нам предстоит работать с таблицами данных. Возьмем например встроенные данные о автомобилях mtcars и перезапишем их в отдельный data frame, после чего посмотрим структуру:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   32 obs. of  11 variables:
+ $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+ $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+ $ disp: num  160 160 108 258 360 ...
+ $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+ $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+ $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+ $ qsec: num  16.5 17 18.6 19.4 17 ...
+ $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+ $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+ $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+ $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+</div>
+</div>
+<p>Мы видим, что в mtcars есть несколько интервальных переменных, для примера возьмем <code>hp</code> - мощность в лошадиных силах.</p>
+<p>Наиболее простой способ рассчитать среднее арифметическое колонки дата фрейма базовыми способами R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mean_hp <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>hp)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mean_hp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 146.6875</code></pre>
+</div>
+</div>
+<p>Более продвинутые методы с помощью пакетов data.table и tidyverse (а именно dplyr) позволяют рассчитать среднее по конкретным группам:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># с помощью tidyverse (dplyr)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(vs) <span class="sc">%&gt;%</span> <span class="co"># группируем по переменной vs</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(hp))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="co"># в итоге получаем среднее hp для всех значений vs </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+     vs  mean
+  &lt;dbl&gt; &lt;dbl&gt;
+1     0 190. 
+2     1  91.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Всё тоже самое сделаем с помощью data.table</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(df) <span class="co"># переводим df в data.table</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mean_hp2 <span class="ot">&lt;-</span> dt[, .(<span class="at">mean_hp =</span> <span class="fu">mean</span>(hp)), by <span class="ot">=</span> vs] </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mean_hp2 <span class="co"># стоит заметить, что на выход мы получаем не tibble, а data.table</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vs   mean_hp
+1:  0 189.72222
+2:  1  91.35714</code></pre>
+</div>
+</div>
+<p>Интересно здесь то, что полученные значения средних <code>hp</code> для значений 0 и 1 столбца <code>vs</code> выводятся не в виде вектора с одним значением, как было в mean(df$hp), а в формате “data.frame” в случае с tidyverse, и “data.table/data.frame” в случае использования пакета data.table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mean_hp1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mean_hp2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.table" "data.frame"</code></pre>
+</div>
+</div>
+<p>Как было показано выше, найти среднее достаточно легко. Однако данный способ имеет серьезные проблемы, которые даже отразились в народном анекдоте: “Чиновники едят мясо, а я капусту, в среднем мы едим голубцы”! Иными словами, если изучаемый объект имеет выбросы, то показатель среднего будет искажен. Так если он такой неустойчивый, то есть ли смысл считать среднее, или всегда стоит отдавать предпочтение более робастым (устойчивым) способам поиска меры центральной тенденции? На самом деле это очень хороший вопрос, на практике стоит считать как среднее, так и, например, медиану. При этом если звезды сойдутся, то среднее арифметическое будет наилучшим показателем, так как в своем рассчете учитывает все наблюдения, что в определенных ситуациях может быть очень важным. Далее мною будут рассмотрены еще два “средних”, а именно среднее усеченное и среднее взвешенное.</p>
+</section>
+<section id="среднее-усеченное" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="среднее-усеченное"><span class="header-section-number">2.2</span> Среднее усеченное</h2>
+<p>Среднее усеченное - это более робастая оценка меры центральной тенденции, так как оно не учитывает наличие экстремально высоких или низких значений. Среднее усеченное отбрасывает фиксированное число сортированных значений с начала и конца последовательности значений изучаемого признака. Формула усеченного среднего: <span class="math display">\[
+\bar{x} = \frac{\sum_{i=p+1}^{n-p} x_i}{n-2p}
+\]</span></p>
+<p>В R усеченное среднее рассчитывается следующим образом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">100</span>, <span class="sc">-</span><span class="dv">80</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="fl">0.3333</span>) <span class="co"># через trim задаем диапазон значений, которые не учавствуют в рассчете</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>Так, мы проигнорировали экстремально низкое значение -80 и экстремально высокое значение 100, из-за чего значение среднего равно 5, как и было в первом примере главы про среднее арифметическое.</p>
 
 
+</section>
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Quarto" data-listing-date-sort="1723748400000" data-listing-file-modified-sort="1723804104096" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1291">
-<div class="thumbnail">
-<p><a href="./posts/My new post/index.html" class="no-external"></a></p><a href="./posts/My new post/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/My new post/531502-tyan-8.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/My new post/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/My new post/index.html" class="no-external">Введение в азы Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/My new post/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Quarto'); return false;">
-Quarto
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/My new post/index.html" class="no-external">В Markdown не очень удобно вручную создавать таблицу, так что воспользуемся возможностями Visual в верхней панеле Rstudio</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/My new post/index.html" class="no-external">
-<div class="listing-date">
-16 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Статистика" data-listing-date-sort="1723748400000" data-listing-file-modified-sort="1723804003518" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="706">
-<div class="thumbnail">
-<p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a></p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Нахождение меры центральной тенденции/photo_2024-08-07_13-29-15.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">Мера центральной тенденции</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">Если мы собираемся проводить количественное исследование, то одним из неотъемлемых методов анализа данных является поиск меры центральной тенденции изучаемого признака.…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">
-<div class="listing-date">
-16 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Нет подходящих элементов
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -467,12 +535,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано");
+    button.setAttribute("title", "Copied!");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано");
+      button.setAttribute("data-bs-title", "Copied!");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",

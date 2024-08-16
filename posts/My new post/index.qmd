@@ -15,7 +15,7 @@ execute:
   warning: false
   message: fals
 date: today
-category: [Quarto]
+categories: [Quarto]
 ---
 
 # Таблица
