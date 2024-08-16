@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-08-16">
+<meta name="dcterms.date" content="2024-08-17">
 
 <title>Мера центральной тенденции – Статистика, R и социология</title>
 <style>
@@ -194,7 +194,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 16, 2024</p>
+        <p class="date">August 17, 2024</p>
       </div>
     </div>
     
@@ -216,7 +216,11 @@ window.Quarto = {
   <li><a href="#среднее-арифметическое" id="toc-среднее-арифметическое" class="nav-link" data-scroll-target="#среднее-арифметическое"><span class="header-section-number">2.1</span> Среднее арифметическое</a></li>
   <li><a href="#среднее-усеченное" id="toc-среднее-усеченное" class="nav-link" data-scroll-target="#среднее-усеченное"><span class="header-section-number">2.2</span> Среднее усеченное</a></li>
   <li><a href="#среднее-взешенное" id="toc-среднее-взешенное" class="nav-link" data-scroll-target="#среднее-взешенное"><span class="header-section-number">2.3</span> Среднее взешенное</a></li>
+  <li><a href="#медиана" id="toc-медиана" class="nav-link" data-scroll-target="#медиана"><span class="header-section-number">2.4</span> Медиана</a></li>
+  <li><a href="#медиана-взвешенная" id="toc-медиана-взвешенная" class="nav-link" data-scroll-target="#медиана-взвешенная"><span class="header-section-number">2.5</span> Медиана взвешенная</a></li>
+  <li><a href="#мода" id="toc-мода" class="nav-link" data-scroll-target="#мода"><span class="header-section-number">2.6</span> Мода</a></li>
   </ul></li>
+  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение"><span class="header-section-number">3</span> Заключение</a></li>
   </ul>
 </nav>
     </div>
@@ -293,12 +297,14 @@ window.Quarto = {
 </div>
 <p>Более продвинутые методы с помощью пакетов data.table и tidyverse (а именно dplyr) позволяют рассчитать среднее по конкретным группам:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># с помощью tidyverse (пакет dplyr)</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(vs) <span class="sc">%&gt;%</span> <span class="co"># группируем по переменной vs</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(hp))</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="co"># в итоге получаем среднее hp для всех значений vs </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse") если не установлен пакет</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("data.table") если не установлен пакет</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># с помощью tidyverse (пакет dplyr)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(vs) <span class="sc">%&gt;%</span> <span class="co"># группируем по переменной vs</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(hp))</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>mean_hp1 <span class="co"># в итоге получаем среднее hp для всех значений vs </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
      vs  mean
@@ -317,6 +323,19 @@ window.Quarto = {
 </div>
 </div>
 <p>Интересно здесь то, что полученные значения средних <code>hp</code> для значений 0 и 1 столбца <code>vs</code> выводятся не в виде вектора с одним значением, как было в mean(df$hp), а в формате “tibble” в случае с tidyverse, и “data.table” в случае использования пакета data.table.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Такие методы вычисления по группам будут актуальны и для дальнейших способов оценок мер центральной тенденции.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mean_hp1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -345,10 +364,113 @@ window.Quarto = {
 </section>
 <section id="среднее-взешенное" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="среднее-взешенное"><span class="header-section-number">2.3</span> Среднее взешенное</h2>
-<p>Среднее взвешанное требует еще больше информации для его расчета, ведь каждое значение <span class="math inline">\(x_i\)</span> умножается на его вес <span class="math inline">\(w_i\)</span>. Формула среднего взвешанного выглядит так: <span class="math display">\[\bar{x_w} = \frac{\sum_{i=1}^{n} x_iw_i}{{\sum_{i}^{n}w_i}}\]</span></p>
-
-
+<p>Среднее взвешенное требует еще больше информации для его расчета, ведь каждое значение <span class="math inline">\(x_i\)</span> умножается на его вес <span class="math inline">\(w_i\)</span>. Формула среднего взвешенного выглядит так: <span class="math display">\[\bar{x_w} = \frac{\sum_{i=1}^{n} x_iw_i}{{\sum_{i}^{n}w_i}}\]</span></p>
+<p>Чтобы рассчитать среднее взвешенное в R датафрейм должен иметь колонку, в которой будут указаны веса. Создадим колонку с весами, используя синтаксис базового R, tidyverse и data.table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># base R</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">671</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>weights <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(mtcars), <span class="at">min =</span> <span class="fl">0.1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df<span class="sc">$</span>weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:32] 0.369 0.355 0.11 0.327 0.851 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">671</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weights =</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(mtcars), <span class="at">min =</span> <span class="fl">0.1</span>, <span class="at">max =</span> <span class="dv">1</span>))</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df<span class="sc">$</span>weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:32] 0.369 0.355 0.11 0.327 0.851 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data.table</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(df)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">671</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>df[, weights<span class="sc">:</span><span class="er">=</span> <span class="fu">runif</span>(.N, <span class="at">min =</span> <span class="fl">0.1</span>, <span class="at">max =</span> <span class="dv">1</span>)]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df<span class="sc">$</span>weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:32] 0.369 0.355 0.11 0.327 0.851 ...</code></pre>
+</div>
+</div>
+<p>Как мы видим, создалась новая колонка <code>weights</code>, в котором содержатся веса для <code>hp</code>. Конечно, они не имеют никакого практического смысла, относительно данных в mtcars и созданы только для примера. Теперь рассчитаем среднее взвешенное с помощью <code>weighted.mean</code>, где сперва указывается переменная, среднее которой нужно вычислить, а после переменная, содержащая вектор весов для каждого наблюдения в переменной:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted.mean</span>(df<span class="sc">$</span>hp, df<span class="sc">$</span>weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 153.6416</code></pre>
+</div>
+</div>
+<p>Выбор весов определяется опытом исследователя, исходя из теоретической рамки исследования или на основе уже известной информации. Например, группы, которые редко попадают в выборку, могут получать более высокие веса, чтобы их вклад в конечные расчеты был более значимым.</p>
 </section>
+<section id="медиана" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="медиана"><span class="header-section-number">2.4</span> Медиана</h2>
+<p>Медиана — это значение, которое делит упорядоченный набор данных на две равные части. В отличие от среднего значения, медиана не чувствительна к выбросам — экстремальным значениям в данных. Это делает ее особенно ценным и актуальным показателем в эмпирических исследованиях, где данные часто бывают асимметричными или содержат выбросы. Например, наличие малого числа людей с очень высоким доходом могут исказить показатель среднего дохода всего населения. В этом случае медиана, которая представляет собой среднее значение, когда данные отсортированы, будет более точным показателем типичного дохода. В R медиана вычисляется следующим образом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">100</span>, <span class="dv">100000</span>, <span class="dv">6</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.5</code></pre>
+</div>
+</div>
+<p>Как видно из результата, наличие выбросов не исказили значение медианы.</p>
+<p>Помимо устойчивости к выбросам данных, медиана особенно актуальна для социологии. Так, велика вероятность, что интересующая нас переменная окажется измерена порядковой шкалой, например, от 1 до 5. Применить среднее арифметическое к такой переменной будет ошибкой, так как порядковая переменная не имеет равных интервалов, то есть разница между 1 и 2 будет иной, чем между 4 и 5. Таким образом, для порядковых переменных медиана - это один из главных инструментов поиска меры центральной тенденции, который учитывает порядковую природу данных.</p>
+</section>
+<section id="медиана-взвешенная" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="медиана-взвешенная"><span class="header-section-number">2.5</span> Медиана взвешенная</h2>
+<p>Если необходимо использовать веса и при этом природа данных неустойчива к выбросам и необходима робастная оценка, то используется медиана взвешенная. Математика медианы взвешенной состоит в том, что нам нужно упорядочить значения переменной, далее мы должны определить значение, в котором сумма весов равна для нижней и верхней половин сортированного списка. В R нет встроенной функции взвешенной медианы, так что придется подключить соответствующий пакет, после чего можно будет произвести вычисление для нашего датафрейма <code>df</code> с созданной колонкой <code>weights</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("matrixStats") если не установлен пакет</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(matrixStats)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">weightedMedian</span>(df<span class="sc">$</span>hp, df<span class="sc">$</span>weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 128.3682</code></pre>
+</div>
+</div>
+</section>
+<section id="мода" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="мода"><span class="header-section-number">2.6</span> Мода</h2>
+<p>Мода - значение признака, которое встречается максимально часто. Это хороший инструмент тогда, когда изучаемая переменная не является интервальной. Мода подходит как для бинарных переменных, так и для порядковых.</p>
+<p>К сожалению, в R нет встроенной функции для поиска моды. Однако, вполне успешно с помощью базовых функций R моду можно рассчитать самостоятельно, для этого нужно построить частотную таблицу используя table() и найти максимальное значение с помощью which.max():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 
+1 </code></pre>
+</div>
+</div>
+<p>Либо! Подключить специальный пакет modeest с функцией mfv:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("modeest")</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modeest)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mfv</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Второй вариант, конечно, предпочтительней, так как используя два костыля из which.max и table мы получим только одну моду, если их на самом деле две:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">table</span>(x)) <span class="co"># на выход узнаем, что мода только одна</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 
+1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mfv</span>(x) <span class="co"># получаем правильный результат, где мода это 0 и 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0 5</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="заключение" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Заключение</h1>
+<p>Поиск меры центральной тенденции - это неотъмлемая процедура описательной статистики, когда в нашем исследовании есть количественные переменные.</p>
+
+
 </section>
 
 </main> <!-- /main -->
