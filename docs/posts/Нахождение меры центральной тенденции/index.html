@@ -367,12 +367,12 @@ window.Quarto = {
 <p>В R усеченное среднее рассчитывается следующим образом:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">100</span>, <span class="sc">-</span><span class="dv">80</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="fl">0.3333</span>) <span class="co"># через trim задаем процент значений, которые не учавствуются в расчете</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="fl">0.3333</span>) <span class="co"># через trim задаем процент значений слева и справа, которые не участвуют в расчете</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
-<p>Так, мы проигнорировали экстремально низкое значение -80 и экстремально высокое значение 100, из-за чего значение среднего равно 5, как и было в первом примере главы про среднее арифметическое. Проблема среднего усеченного в том, что нам нужно самостоятельно указать через значение trim, сколько процентов начала и конца мы не станем учитывать в расчете меры центральной тенденции. Чаще всего это значение останавливается на 10%, то есть <code>trim = 0.1</code>, однако на реальных данных нужно смотреть на распределение переменной.</p>
+<p>Так, мы проигнорировали экстремально низкое значение -80 и экстремально высокое значение 100, из-за чего значение среднего равно 5, как и было в первом примере главы про среднее арифметическое. Проблема среднего усеченного в том, что нам нужно самостоятельно указать через значение trim, сколько процентов начала и конца мы не станем учитывать в расчете меры центральной тенденции. Чаще всего это значение останавливается на 10%, то есть <code>trim = 0.1</code>, однако на реальных данных нужно смотреть на распределение переменной. <code>trim</code> принимает значения от 0 до 0.5, при этом если <code>trim = 0.5</code>, то мы считаем медиану!</p>
 </section>
 <section id="среднее-взешенное" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="среднее-взешенное"><span class="header-section-number">2.3</span> Среднее взешенное</h2>
