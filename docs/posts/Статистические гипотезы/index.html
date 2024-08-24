@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Мелихов Александр">
 
-<title>Статистика, R и социология</title>
+<title>Статистические гипотезы – Статистика, R и социология</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,26 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,35 +68,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Поиск"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -131,7 +99,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -141,7 +109,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Статистика, R и социология</span>
     </a>
   </div>
@@ -152,7 +120,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">О блоге</span></a>
   </li>  
   <li class="nav-item compact">
@@ -176,230 +144,221 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Статистика, R и социология</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Статистические гипотезы</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Статистика</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Автор</div>
-      <div class="quarto-title-meta-contents">
-               <p>Мелихов Александр </p>
-            </div>
-    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Дата публикации</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">19 августа 2024 г.</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Категории</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Все <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Статистика">Статистика <span class="quarto-category-count">(5)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#основные-понятия" id="toc-основные-понятия" class="nav-link active" data-scroll-target="#основные-понятия"><span class="header-section-number">1</span> Основные понятия</a></li>
+  <li><a href="#выбираем-из-двух-гипотез" id="toc-выбираем-из-двух-гипотез" class="nav-link" data-scroll-target="#выбираем-из-двух-гипотез"><span class="header-section-number">2</span> Выбираем из двух гипотез!</a></li>
+  <li><a href="#ошибки-первого-и-второго-рода" id="toc-ошибки-первого-и-второго-рода" class="nav-link" data-scroll-target="#ошибки-первого-и-второго-рода"><span class="header-section-number">3</span> Ошибки первого и второго рода</a></li>
+  <li><a href="#уровень-значимости" id="toc-уровень-значимости" class="nav-link" data-scroll-target="#уровень-значимости"><span class="header-section-number">4</span> Уровень значимости</a></li>
+  <li><a href="#алгоритм-проверки-статистических-гипотез" id="toc-алгоритм-проверки-статистических-гипотез" class="nav-link" data-scroll-target="#алгоритм-проверки-статистических-гипотез"><span class="header-section-number">5</span> Алгоритм проверки статистических гипотез</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<section id="основные-понятия" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Основные понятия</h1>
+<p><span class="math inline">\(H_0\)</span> - основная гипотеза.</p>
+<p><span class="math inline">\(H_1\)</span> - альтернативная (конкурирующая) гипотеза.</p>
+<p>Если не уточняется, о какой гипотезе идет речь, то имеется в виду основная гипотеза. Чаще всего одна гипотеза утверждает, что предположение верно, а другая - что нет.</p>
+</section>
+<section id="выбираем-из-двух-гипотез" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Выбираем из двух гипотез!</h1>
+<p>Мы не просто принимаем или отвергаем определенную гипотезу, а выбираем между двух гипотез. Почему нельзя просто отвергнуть или не отвергнуть основную гипотезу? Зачем обязательно нужна вторая? Дело в том, что бывают ситуации, когда, например, предположение “средние не равны” является слишком общим и включает в себя те случаи, которые нам не интересны. Воспользуемся примером, допустим, нас интересуют, как изменились продажи акций после рекламы.</p>
+<table class="caption-top table">
+<caption>Продажи акций до и после рекламы</caption>
+<colgroup>
+<col style="width: 5%">
+<col style="width: 40%">
+<col style="width: 5%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Номер случая</th>
+<th style="text-align: center;">Продажи до рекламы (X)</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Продажи после рекламы (Y)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">=</td>
+<td style="text-align: center;">Y</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">!=</td>
+<td style="text-align: center;">Y</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">&lt;</td>
+<td style="text-align: center;">Y</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">&gt;</td>
+<td style="text-align: center;">Y</td>
+</tr>
+</tbody>
+</table>
+<p>Информация о том, что продажи не равны нас не очень и устраивает, в чем-то она, конечно, полезна, но все же нам хочется точно знать, выросли продажи или упали. Таким образом основной гипотезой будет выступать случай 1, а альтернативной случай 4.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Не умеем!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Гипотеза справедлива с вероятностью 0.95”</p>
+</div>
+</div>
+<p>Будет неточным или даже опасным утверждением “основная гипотеза принята…” или “основная гипотеза отвергнута”. Правильно говорить “основная гипотеза отвергнута” или “основная гипотеза не отвергнута”. Так как обычно проверяют лишь достаточное условие. Мы проверяем не основную гипотезу, а достаточное условие.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Пример
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Гипотеза: число делится на 6 нацело</p>
+<p>Фактически проверяем, делится ли число на 2 нацело</p>
+</div>
+</div>
+<p>Исходя из условий примера, в ситуации, когда выбранное число на 2 нацело не делится, то мы уверены, что и на 6 нацело оно не делится, а значит основную гипотезу отвергаем. Однако, если число на 2 нацело делится, то хоть и принять основную гипотезу мы не можем, но и отвергнуть ее мы тоже не можем. Отсюда так и получается, что, говоря о статистических гипотезах, мы не можем использовать слово “принимаем”, а значит ограничиваемся только “отвергаем” и “не отвергаем”.</p>
+<p>Конечно, хотя мы и понимаем, что основная гипотеза принята быть не может, но действуем так, будто мы ее принимаем.</p>
+</section>
+<section id="ошибки-первого-и-второго-рода" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Ошибки первого и второго рода</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-297275942.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="597"></p>
+</figure>
+</div>
+<p>Ошибка I рода состоит в том, что отвергается основная гипотеза, когда на самом деле она верна.</p>
+<p>Ошибка II рода состоит в том, что отвергается конкурирующая гипотеза, когда она верна.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Полезное правило
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ошибка I рода тяжелее по своим последствиям</p>
+</div>
+</div>
+<p>Можно ли свести частоту (вероятность) ошибки I или II рода к нулю? Это возможно, но обычно экономически не целесообразно. Правда, есть исключения, например, всеобщая вакцинация. Возьмем за нулевую гипотезу “человек нуждается в вакцинации”, тогда ситуация, при которой он нуждается в вакцинации, но ему ее не сделают (то есть ошибка I рода) стремится к нулю. Однако, тут есть и обратный эффект, так как с уменьшением вероятности ошибки I рода, увеличивается вероятность ошибки II рода.</p>
+<p>Таким образом, мы точно знаем, что последствия ошибок могут быть различными, как правило, опаснее ошибки I рода и при проверке статистических гипотез исходят именно из этой предпосылки. Вероятность ошибки первого рода ограничивают вероятностным значением <span class="math inline">\(a\)</span>. Отсюда, мы плавно переходим к понятию уровня значимости.</p>
+</section>
+<section id="уровень-значимости" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Уровень значимости</h1>
+<p>В качестве уровня значимости (<span class="math inline">\(a\)</span>) выбирают одно из чисел 0.005, 0.01, 0.05 и (редко) 0.1.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Чаще всего уровень значимости равен 0.05</p>
+</div>
+</div>
+<p>Почему именно такие значения? Это результат консенсуса между практиками и теоретиками. Теоретики уверены, что эти числа придумали (заказаны им) практиками, а практики уверены, что они каким-то образом выведены теоретиками. Как результат, все этими числами довольны.</p>
+<p>На самом деле выбор уровня значимости - большая проблема! Зависит, например, от числа наблюдений! Лучше смотреть, какие уровни значимости берутся в той области, в которой собираемся работать. Например, в работе атомной электростанции уровень значимости 0.05 неприемлем, так как это слишком большой риск.</p>
+<p>Применяем критерий так, чтобы вероятность ошибки первого рода равнялась уровню значимости. А что насчет вероятности ошибки II рода? Очень тяжело добиться снижения вероятности ошибки II рода, нужно использовать статистические тесты, статистические критерии, которые состоятельны. Состоятельный статистический критерий — это такой критерий, у которого с ростом числа наблюдений вероятность ошибки II рода стремится к нулю.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Большие выборки необходимы, чтобы уменьшить вероятность ошибки II рода</p>
+</div>
+</div>
+<p>Но, если выборка маленькая и увеличить ее не удается, то есть несколько методов:</p>
+<ol type="1">
+<li><p>“зажмуриться, сделать вид, что ничего не произошло” то есть проигнорировать вероятность ошибки II рода, применить процедуру и использовать результат; такой метод скорее недопустим, так как вероятность ошибки II рода будет слишком большой, что исказит результат</p></li>
+<li><p>увеличить вероятность ошибки I рода, то есть увеличить уровень значимости (например, до 0.15 или 0.2), чтобы сделать вероятности ошибок сопоставимыми</p></li>
+</ol>
+</section>
+<section id="алгоритм-проверки-статистических-гипотез" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Алгоритм проверки статистических гипотез</h1>
+<ol type="1">
+<li><p>Определяем основную и альтернативную гипотезу</p></li>
+<li><p>Определяем уровень значимости <span class="math inline">\(a\)</span> (вероятность ошибки I рода)</p></li>
+<li><p>Определяем, какой статистический критерий будем использовать</p></li>
+<li><p>Проверяем все условия, при которых критерий будет работать. Условия берем из учебника или справочника.</p></li>
+<li><p>Находим p-value/значимость (significance)</p></li>
+<li><p>Если p-value &lt; <span class="math inline">\(a\)</span> - гипотезу отвергаем, если p-value &gt; <span class="math inline">\(a\)</span> - не отвергаем</p></li>
+</ol>
+<p>Что же такое p-value? Вот несколько определений, взятых из книги “Практическая статистика для специалистов Data Science”.</p>
+<ol type="1">
+<li><p>p-value — это вероятность, которая приводит к результатам, таким же предельным, какими могут оказаться наблюдаемые результаты с учетом модели нулевой гипотезы.</p></li>
+<li><p>С учетом случайной модели, которая воплощает нулевую гипотезу, p-значение является вероятностью получения столь же необычных или предельных результатов, что и наблюдаемые результаты.</p></li>
+<li><p>Это частота, с которой случайная модель приводит к результату, более предельному, чем наблюдаемый результат.</p></li>
+</ol>
+<p>Когда мы смотрим на значение p-value, чтобы отвергнуть или не отвергнуть нулевую гипотезу, мы фактически пытаемся ответить на вопрос “дает ли эксперимент более предельный результат, чем тот, который может породить случайность”. И если результат лежит за рамками случайной вариации, то есть значение p-value &lt; принятого нами <span class="math inline">\(a\)</span>, он является <code>статистически значимым</code>.</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Статистика" data-listing-date-sort="1724533200000" data-listing-file-modified-sort="1724538866919" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1403">
-<div class="thumbnail">
-<p><a href="./posts/Сравнение центров распределений/index.html" class="no-external"></a></p><a href="./posts/Сравнение центров распределений/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Сравнение центров распределений/photo_2024-08-24_19-48-48.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Сравнение центров распределений/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external">Сравнение цетров распределений</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external">Центр распределения — то одно единственное число, которое описывало, характеризовало бы выборку. Подробнее о данной теме расписано в посте о мерах центральной тенденции.…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external">
-<div class="listing-date">
-25 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Статистика" data-listing-date-sort="1724360400000" data-listing-file-modified-sort="1724538866969" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="714">
-<div class="thumbnail">
-<p><a href="./posts/Проверка на нормальность распределения/index.html" class="no-external"></a></p><a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Проверка на нормальность распределения/DbnOZavW0AAav2J-1024x876.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/Проверка на нормальность распределения/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">Проверка на нормальность распределения</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">Мы можем проверить гипотезу о нормальности распределения с помощью двух статистических тестов, Шапиро-Уилка и более строгого теста Колмогорова-Смирнова, за <span class="math inline">\(a\)</span> возьмем…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">
-<div class="listing-date">
-23 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Статистика" data-listing-date-sort="1724274000000" data-listing-file-modified-sort="1724538867014" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1068">
-<div class="thumbnail">
-<p><a href="./posts/Преобразования переменных/index.html" class="no-external"></a></p><a href="./posts/Преобразования переменных/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Преобразования переменных/Слайд1.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Преобразования переменных/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Преобразования переменных/index.html" class="no-external">Преобразование переменных</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Преобразования переменных/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Преобразования переменных/index.html" class="no-external">Одним из решений может служить использование семейства преобразований Бокса-Кокса (Box-Cox). Данное семейство реализовано функцией <code>boxcox</code> из пакета “MASS”. Оно позволяет…<code></code><code></code><span class="math inline"></span></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Преобразования переменных/index.html" class="no-external">
-<div class="listing-date">
-22 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Статистика" data-listing-date-sort="1724014800000" data-listing-file-modified-sort="1724538587141" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1148">
-<div class="thumbnail">
-<p><a href="./posts/Статистические гипотезы/index.html" class="no-external"></a></p><a href="./posts/Статистические гипотезы/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Статистические гипотезы/TypeITypeIIErrors1.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Статистические гипотезы/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external">Статистические гипотезы</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external"><span class="math inline">\(H_0\)</span> - основная гипотеза.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external">
-<div class="listing-date">
-19 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Статистика" data-listing-date-sort="1723755600000" data-listing-file-modified-sort="1724365168946" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1540">
-<div class="thumbnail">
-<p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a></p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Нахождение меры центральной тенденции/photo_2024-08-07_13-29-15.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">Мера центральной тенденции</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">Если мы собираемся проводить количественное исследование, то одним из неотъемлемых методов анализа данных является поиск меры центральной тенденции изучаемого признака.…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">
-<div class="listing-date">
-16 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="Quarto" data-listing-date-sort="1723237200000" data-listing-file-modified-sort="1724150033689" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1283">
-<div class="thumbnail">
-<p><a href="./posts/My new post/index.html" class="no-external"></a></p><a href="./posts/My new post/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/My new post/531502-tyan-8.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/My new post/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/My new post/index.html" class="no-external">Введение в азы Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/My new post/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Quarto'); return false;">
-Quarto
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/My new post/index.html" class="no-external">В Markdown не очень удобно вручную создавать таблицу, так что воспользуемся возможностями Visual в верхней панеле Rstudio</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/My new post/index.html" class="no-external">
-<div class="listing-date">
-10 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Нет подходящих элементов
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

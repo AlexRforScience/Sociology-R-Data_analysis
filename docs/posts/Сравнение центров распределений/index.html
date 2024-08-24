@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Сравнение цетров распределений – Статистика, R и социология</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+
+<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Статистика, R и социология</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Поиск"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">О блоге</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/AlexRforScience"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/AlexR_stat_soc"> <i class="bi bi-telegram" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Сравнение цетров распределений</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Статистика</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Дата публикации</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">19 августа 2024 г.</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#сравнение-центров-распределений" id="toc-сравнение-центров-распределений" class="nav-link active" data-scroll-target="#сравнение-центров-распределений"><span class="header-section-number">1</span> Сравнение центров распределений</a></li>
+  <li><a href="#парные-и-независимые-выборки" id="toc-парные-и-независимые-выборки" class="nav-link" data-scroll-target="#парные-и-независимые-выборки"><span class="header-section-number">2</span> Парные и независимые выборки</a></li>
+  <li><a href="#t-test" id="toc-t-test" class="nav-link" data-scroll-target="#t-test"><span class="header-section-number">3</span> T-test</a>
+  <ul class="collapse">
+  <li><a href="#гипотеза-о-равенстве-дисперсий" id="toc-гипотеза-о-равенстве-дисперсий" class="nav-link" data-scroll-target="#гипотеза-о-равенстве-дисперсий"><span class="header-section-number">3.1</span> Гипотеза о равенстве дисперсий</a></li>
+  <li><a href="#односторонние-и-двусторонние-тесты" id="toc-односторонние-и-двусторонние-тесты" class="nav-link" data-scroll-target="#односторонние-и-двусторонние-тесты"><span class="header-section-number">3.2</span> Односторонние и двусторонние тесты</a></li>
+  <li><a href="#реализация-t-test" id="toc-реализация-t-test" class="nav-link" data-scroll-target="#реализация-t-test"><span class="header-section-number">3.3</span> Реализация t-test</a></li>
+  <li><a href="#если-данные-существенно-отклоняются-от-нормального" id="toc-если-данные-существенно-отклоняются-от-нормального" class="nav-link" data-scroll-target="#если-данные-существенно-отклоняются-от-нормального"><span class="header-section-number">3.4</span> Если данные существенно отклоняются от нормального</a></li>
+  </ul></li>
+  <li><a href="#критерий-манна-уитни" id="toc-критерий-манна-уитни" class="nav-link" data-scroll-target="#критерий-манна-уитни"><span class="header-section-number">4</span> Критерий Манна-Уитни</a>
+  <ul class="collapse">
+  <li><a href="#односторонние-и-двусторонние-тесты-1" id="toc-односторонние-и-двусторонние-тесты-1" class="nav-link" data-scroll-target="#односторонние-и-двусторонние-тесты-1"><span class="header-section-number">4.1</span> Односторонние и двусторонние тесты</a></li>
+  <li><a href="#точное-вычисление-p-значения" id="toc-точное-вычисление-p-значения" class="nav-link" data-scroll-target="#точное-вычисление-p-значения"><span class="header-section-number">4.2</span> Точное вычисление p-значения</a></li>
+  <li><a href="#реализация-теста-манна-уитни" id="toc-реализация-теста-манна-уитни" class="nav-link" data-scroll-target="#реализация-теста-манна-уитни"><span class="header-section-number">4.3</span> Реализация теста Манна-Уитни</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="сравнение-центров-распределений" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Сравнение центров распределений</h1>
+<p>Центр распределения — то одно единственное число, которое описывало, характеризовало бы выборку. Подробнее о данной теме расписано в посте о мерах центральной <a href="https://alexrforscience.github.io/Sociology-R-Data_analysis/posts/Нахождение%20меры%20центральной%20тенденции/#зачем">тенденции</a>. Когда мы производим сравнения, то мы либо проверяем гипотезу о равенстве математических ожиданий (равенство средних), либо проверяем гипотезу о равенстве медиан (на самом деле не совсем медиан).</p>
+</section>
+<section id="парные-и-независимые-выборки" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Парные и независимые выборки</h1>
+<p>Прежде, чем производить сравнение, мы должны определить, являются ли наши выборки зависимыми или независимыми.</p>
+<p>Парные (зависимые) выборки — это те наблюдения, которые связаны между собой, например уровень сахара в крови у группы до принятия препарата и после, продажи менеджеров до тренинга и после.</p>
+<p>Независимые выборки — каждое наблюдение соответствует отдельному объекту, то есть измеряет разные объекты.</p>
+<p>Чтобы указать, что выборки независимы, то указываем <code>paired = FALSE</code>, а если выборки зависимы, то <code>paired = TRUE</code>. По умолчанию стоит функция <code>paired = FALSE</code> (в R вообще по умолчанию во многих функциях аргументы имеют значение <code>FALSE</code>).</p>
+</section>
+<section id="t-test" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> T-test</h1>
+<p>Если центром распределения выбрано среднее арифметическое, используем критерий Стьюдента.</p>
+<p>Определяется следующей формулой <code>t.test(x, y, alternative = "two.sided", paired = FALSE, var.equal = FALSE)</code>, если нам нужно сравнить среднее не двух числовых переменных, а одну числовую переменную по группирующей переменной с двумя значениями, то указываем <code>x~y</code>.</p>
+<p>Ранее было обсуждено, что значит <code>paired</code>, но что такое <code>var.equal</code>? <code>var.equal</code> указывает на то, равны ли дисперсии или нет. Если мы это выясним, то мы “очень поможем” нашему тесту.</p>
+<section id="гипотеза-о-равенстве-дисперсий" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="гипотеза-о-равенстве-дисперсий"><span class="header-section-number">3.1</span> Гипотеза о равенстве дисперсий</h2>
+<p>Данная гипотеза проверяется с помощью ряда тестов (F-test of equality of variances, Bartlett`s test, Levene`s test), однако наиболее эффективными, ввиду своей робастности, являются Fligner-Killen test и Brown-Forsythe test.</p>
+<p><span class="math inline">\(H_0:\)</span> Дисперсии равны</p>
+<p>Реализуем оба теста в R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fligner.test</span>(disp<span class="sc">~</span><span class="fu">factor</span>(vs), df)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fligner-Killeen test of homogeneity of variances
+
+data:  disp by factor(vs)
+Fligner-Killeen:med chi-squared = 3.2564, df = 1, p-value = 0.07114</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("onewaytests") если пакет не скачан</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(onewaytests)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">bf.test</span>(disp<span class="sc">~</span><span class="fu">factor</span>(vs), df)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Brown-Forsythe Test (alpha = 0.05) 
+------------------------------------------------------------- 
+  data : disp and factor(vs) 
+
+  statistic  : 35.30207 
+  num df     : 1 
+  denom df   : 26.97694 
+  p.value    : 2.476526e-06 
+
+  Result     : Difference is statistically significant. 
+------------------------------------------------------------- </code></pre>
+</div>
+</div>
+<p>Прагматично использовать оба теста, после чего, при наличии различных результатов, произвести дополнительные проверки. В нашем случае результаты отличаются, Fligner-Killen test показал, что гипотеза о равенстве дисперсий не отклоняется, а Brown-Forsythe test имеет <span class="math inline">\(a &lt; 0.05\)</span>, что говорит о том, что основную гипотезу о равенстве дисперсий стоит отклонить. Литература говорит о том, что оба тесты считаются робастными, а если посмотреть на ядерную оценку плотности переменной <code>disp</code>, где цветом выделены значения для <code>vs</code>, то распределение далеко от нормального и требует устойчивых тестов:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df)<span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(disp, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">fill =</span> <span class="fu">factor</span>(vs),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">colour =</span> <span class="fu">factor</span>(vs)), </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Равенство дисперсий - вопрос очень дискуссионный, на самом деле есть устойчивая <a href="https://garstats.wordpress.com/2023/05/26/varhom/">практика</a> игнорировать данный этап анализа и считать, что дисперсии не равны, недаром в R по умолчанию стоит метод теста Уэлча. Какими бы устойчивыми методами бы не были Fligner-Killen test и Brown-Forsythe test, не допустить ошибку при настолько ассиметричном распределении достаточно тяжело.</p>
+</section>
+<section id="односторонние-и-двусторонние-тесты" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="односторонние-и-двусторонние-тесты"><span class="header-section-number">3.2</span> Односторонние и двусторонние тесты</h2>
+<p>Отлично, осталось определиться с тем, что указать в <code>alternative</code>. “two.sided” мы указываем, если наша альтернативная гипотеза заключается только в неравенстве средних, то есть <span class="math inline">\(H_0: x = y\)</span>, а <span class="math inline">\(H_1: x \not= y\)</span>. Но что делать, если наша альтернативная гипотеза - это <span class="math inline">\(H_1: x &gt; y\)</span> или <span class="math inline">\(H_1: x &lt; y\)</span>? Необходимо указать в <code>alternative</code> значение “less” для &lt;, или “greater” для &gt;. В нашем случае не принципиально, какое направление указать, так что оставим “two.sided”.</p>
+</section>
+<section id="реализация-t-test" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="реализация-t-test"><span class="header-section-number">3.3</span> Реализация t-test</h2>
+<p>Осталось узнать результаты t.test:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(disp<span class="sc">~</span>vs,  <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">data =</span> df) <span class="co"># считаем, что дисперсии не равны, исходя из bf.test</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  disp by vs
+t = 5.9416, df = 26.977, p-value = 2.477e-06
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 114.3628 235.0229
+sample estimates:
+mean in group 0 mean in group 1 
+       307.1500        132.4571 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># из интересного, аналогичный результат можно воспроизвести следующей конструкцией, которая реализуется без ~</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(df<span class="sc">$</span>disp[df<span class="sc">$</span>vs <span class="sc">==</span><span class="dv">0</span>], df<span class="sc">$</span>disp[df<span class="sc">$</span>vs <span class="sc">==</span><span class="dv">1</span>],  <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  df$disp[df$vs == 0] and df$disp[df$vs == 1]
+t = 5.9416, df = 26.977, p-value = 2.477e-06
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 114.3628 235.0229
+sample estimates:
+mean of x mean of y 
+ 307.1500  132.4571 </code></pre>
+</div>
+</div>
+<p>В результате получаем <span class="math inline">\(p-value &lt; 0.05\)</span>, а значит основную гипотезу о равенстве средних отвергается, то есть средние значения переменной <code>disp</code> в группе 0 и группе 1 переменной <code>vs</code> не равны.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+RobustBF
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>Если дисперсии не равны, то неявно в R используется тест Уэлча. На самом деле, можно произвести более надежную процедуру. Для выполнения надежного t-критерий Уэлча (Robust Welch’s Two Sample t-Test) для двух выборок, чтобы проверить равенство средних значений двух симметричных с длинным хвостом (LTS) распределений, когда дисперсии не равны, необходимо установить и подключить пакет “RobustBF” и воспользоваться функцией <code>RW</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("RobustBF") если не установлен пакет</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RobustBF)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">RW</span>(df<span class="sc">$</span>disp[df<span class="sc">$</span>vs <span class="sc">==</span><span class="dv">0</span>], df<span class="sc">$</span>disp[df<span class="sc">$</span>vs <span class="sc">==</span><span class="dv">1</span>]) <span class="co"># конструкция функции RW не поддерживает ~, так что осуществить проверку предыдущих гипотез можно только так</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Robust Welch's Two Sample t-Test
+
+data:  y1 and y2
+RW = 6.3073, df = 26.737, p-value &lt; 2.2e-16
+alternative hypothesis: true difference between in means is not equal to 0
+sample estimates:
+mean of y1 mean of y2   sd of y1   sd of y2 
+  309.4704   129.5264   105.6151    55.4811 </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(p-value &lt; 0.05\)</span>, основную гипотезу о равенстве средних стоит отвергнуть. Результат идентичен тесту Уэлча.</p>
+</section>
+<section id="если-данные-существенно-отклоняются-от-нормального" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="если-данные-существенно-отклоняются-от-нормального"><span class="header-section-number">3.4</span> Если данные существенно отклоняются от нормального</h2>
+<p>Т-критерий Стьюдента работает, когда у нас каждая из выборок либо имеет нормальное распределение, либо несущественно отличается от нормального. Если распределение не нормально, а отклонение от нормального существенное, то есть 3 пути:</p>
+<ol type="1">
+<li><p>Все как в случае нормальности, если выборка большая (<span class="math inline">\(n &gt; 30, 300\)</span>), то среднее арифметическое, в силу центральной предельной теоремы, будет иметь примерно нормальное распределение и всё сработает. Что значит большая? Есть литература, которая говорит больше 20 наблюдений (едва ли это большая выборка!), но стоит за минимум брать больше 300 наблюдений.</p></li>
+<li><p>Все же сравнивать медианы (Mann-Whitney U test)</p></li>
+<li><p>Преобразовать данные к нормальному виду (рискованный метод!)</p></li>
+</ol>
+<p>Первый путь кажется достаточно бесперспективным и идти по нему не стоит, однако порой можно встретить примеры, когда поступают именно так (например, лично я прямо сейчас проводил t.test в данном посте, несмотря на распределение групп, так как моей задачей было показать, как применить метод сравнения средних, а не получить осмысленный результат).</p>
+<p>Второй путь наиболее привлекателен, о нем будет сказано далее более подробно.</p>
+<p>Третий путь может считаться достаточно рискованным, однако в определенных задачах покажет достаточную эффективность. Выше мы уже преобразовывали переменную через логарифмирование, и она действительно стала иметь более нормальное распределение. Более подробно про преобразование переменных.</p>
+</section>
+</section>
+<section id="критерий-манна-уитни" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Критерий Манна-Уитни</h1>
+<p>Если центром распределения выбрана медиана, используем тест Манна-Уитни. Основателем теста является Вилкоксон, так что его фамилия часто встречается в названии теста, например Wilcoxon rank-sum test. В R тест как раз и назван в честь Вилкоксона, выполняется с помощью функции <code>wilcox.test</code></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Критерий Манна-Уитни основан на рангах, он не учитывает <strong>насколько</strong> больше/меньше <span class="math inline">\(X\)</span> чем <span class="math inline">\(Y\)</span>, не учитывает величины наблюдения</p>
+</div>
+</div>
+<p>Тот факт, что критерий основан на рангах, позволяет игнорировать распределение и наличие выбросов.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важно!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Критерий Манна-Уитни не проверяет гипотезу о равенстве медиан.</p>
+</div>
+</div>
+<p>Имеются две выборки случайных велечин <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>.</p>
+<p>Основная гипотеза: <span class="math inline">\(P(X&gt;Y)=P(X&lt;Y)\)</span>, то есть вероятность того, что <span class="math inline">\(X\)</span> больше <span class="math inline">\(Y\)</span> и вероятность того, что <span class="math inline">\(X\)</span> меньше <span class="math inline">\(Y\)</span> одинаковая.</p>
+<p>Альтернативная гипотеза: <span class="math inline">\(P(X&gt;Y)\neq P(X&lt;Y)\)</span></p>
+<p>Мы проверяем “как часто <span class="math inline">\(X\)</span> больше/меньше <span class="math inline">\(Y\)</span>”. Если у нас одинаково часто <span class="math inline">\(X\)</span> больше <span class="math inline">\(Y\)</span>, и <span class="math inline">\(Y\)</span> больше <span class="math inline">\(X\)</span>, то нулевая гипотеза не отвергается.</p>
+<p>Тут важно уточнить то, что хоть и говорят о сравнении медиан, это не совсем правильно. Например, посмотрим на случай, когда медианы в точности одинаковы:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-23963b34c2c9314591cd" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-23963b34c2c9314591cd">{"x":{"data":[{"x":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"y":[5,4,4,4,5,4,5,4,5,5,5,4,5,4,5,5,4,4,4,4,1,2,3,3,3,5,5,5,17,13,12,19,8,12,17,17,13,20,13,6,16,19,20,12,8,20,12,10,5,5,5,5,5,5,5,10],"hoverinfo":"y","type":"box","fillcolor":"rgba(248,118,109,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"x","legendgroup":"x","showlegend":true,"xaxis":"x","yaxis":"y","frame":null},{"x":[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],"y":[1,3,3,3,1,3,3,1,1,3,1,3,3,3,3,3,2,2,1,2,1.5,1.5,1.7,1.8999999999999999,3.8999999999999999,3.3999999999999999,4.9000000000000004,9,9,10,10,10,9,9,10,10,9,9,9,10,9,9,9,10,10,9,10,5,5,7,7.9000000000000004,9,9,10,10,10],"hoverinfo":"y","type":"box","fillcolor":"rgba(0,191,196,1)","marker":{"opacity":null,"outliercolor":"rgba(0,0,0,1)","line":{"width":1.8897637795275593,"color":"rgba(0,0,0,1)"},"size":5.6692913385826778},"line":{"color":"rgba(51,51,51,1)","width":1.8897637795275593},"name":"y","legendgroup":"y","showlegend":true,"xaxis":"x","yaxis":"y","frame":null}],"layout":{"margin":{"t":26.228310502283104,"r":7.3059360730593621,"b":40.182648401826491,"l":37.260273972602747},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,2.6000000000000001],"tickmode":"array","ticktext":["x","y"],"tickvals":[1,2],"categoryorder":"array","categoryarray":["x","y"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"group","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.049999999999999933,20.949999999999999],"tickmode":"array","ticktext":["5","10","15","20"],"tickvals":[5,10,15,20],"categoryorder":"array","categoryarray":["5","10","15","20"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.66417600664176002,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"value","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"group","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"516854ac5423":{"x":{},"y":{},"fill":{},"type":"box"}},"cur_data":"516854ac5423","visdat":{"516854ac5423":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>При этом основную гипотезу при <span class="math inline">\(a = 0.05\)</span> мы не отвергаем, так как <span class="math inline">\(p-value&lt;a\)</span>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  new_df$value by new_df$group
+W = 1975, p-value = 0.01724
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<p>Еще раз, строго говоря, мы не сравниваем именно медианы, но неоднократно, когда применяют тест Манна-Уитни, даже в статистической литературе, говорят о сравнении медиан.</p>
+<section id="односторонние-и-двусторонние-тесты-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="односторонние-и-двусторонние-тесты-1"><span class="header-section-number">4.1</span> Односторонние и двусторонние тесты</h2>
+<p>Указываем в <code>alternative</code> “two.sided”, если наша альтернативная гипотеза заключается только в том, что вероятности отличаются, то есть <span class="math inline">\(H_0: P(X&gt;Y)=P(X&lt;Y)\)</span>, а <span class="math inline">\(H_1: P(X&gt;Y)\neq P(X&lt;Y)\)</span>. Но что делать, если наша альтернативная гипотеза - это <span class="math inline">\(P(X&gt;Y) &gt; P(X&lt;Y)\)</span> или <span class="math inline">\(P(X&gt;Y)&lt; P(X&lt;Y)\)</span>? Необходимо указать в <code>alternative</code> значение “less” для &lt;, или “greater” для &gt;.</p>
+</section>
+<section id="точное-вычисление-p-значения" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="точное-вычисление-p-значения"><span class="header-section-number">4.2</span> Точное вычисление p-значения</h2>
+<p>В формуле <code>wilcox.test</code> мы можем указать <code>exact</code>, который будет либо <code>TRUE</code>, либо <code>FALSE</code>. Если мы поставим <code>TRUE</code>, то это займет больше времени для вычисления, так как будут учитываться более точная формула, которая учитывает, например, сортировки. Лучше всегда ставить <code>TRUE</code>, и если это займет слишком много времени (которое приносит вам неудобства), то стоит поставить <code>FALSE</code>.</p>
+</section>
+<section id="реализация-теста-манна-уитни" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="реализация-теста-манна-уитни"><span class="header-section-number">4.3</span> Реализация теста Манна-Уитни</h2>
+<p>Итоговая реализация теста в R выглядит следующим образом, воспользуемся уже знакомым датафреймом <code>df</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(disp<span class="sc">~</span>vs,  <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">exact =</span> <span class="cn">TRUE</span>, <span class="at">data =</span> df)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  disp by vs
+W = 232, p-value = 6.067e-05
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<p>В результате получаем <span class="math inline">\(p-value &lt; 0.05\)</span>, а значит основная гипотеза о том, что вероятности того, что значение <code>disp</code> для <code>vs = 0</code> и значения <code>disp</code> для <code>vs = 1</code> равны, отвергается. Мы можем говорить о том, что “локальное смещение” <code>disp</code> отличается между группами с <code>vs = 0</code> и <code>vs = 1</code>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -2,6 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/Сравнение центров распределений/index.html",
+      "/posts/Проверка на нормальность распределения/index.html",
+      "/posts/Преобразования переменных/index.html",
+      "/posts/Статистические гипотезы/index.html",
       "/posts/Нахождение меры центральной тенденции/index.html",
       "/posts/My new post/index.html"
     ]
