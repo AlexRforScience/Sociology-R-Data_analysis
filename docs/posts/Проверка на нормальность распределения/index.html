@@ -223,7 +223,7 @@ window.Quarto = {
 
 <section id="нормальность-распределения" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Нормальность распределения</h1>
-<p>Мы можем проверить гипотезу о нормальности распределения с помощью разных тестов, но обычно используют два основных статистических теста - Шапиро-Уилка и более строгий тест Колмогорова-Смирнова, за <span class="math inline">\(a\)</span> возьмем значение 0.05.</p>
+<p>Мы можем проверить гипотезу о нормальности распределения с помощью разных тестов, но обычно используют два основных статистических теста - Шапиро-Уилка и более строгий тест Колмогорова-Смирнова, за <span class="math inline">\(\alpha\)</span> возьмем значение 0.05.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -250,7 +250,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Далее, применим тест Шапиро-Уилка (<span class="math inline">\(a=0.05\)</span>) и посмотрим на результат:</p>
+<p>Далее, применим тест Шапиро-Уилка (<span class="math inline">\(\alpha=0.05\)</span>) и посмотрим на результат:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(x)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -261,7 +261,7 @@ data:  x
 W = 0.99838, p-value = 0.4765</code></pre>
 </div>
 </div>
-<p>Полученный результат p-value &gt; <span class="math inline">\(a\)</span>, а значит основную гипотезу о нормальности распределения не отвергаем.</p>
+<p>Полученный результат p-value &gt; <span class="math inline">\(\alpha\)</span>, а значит основную гипотезу о нормальности распределения не отвергаем.</p>
 <p>Попробуем обратиться к тесту Колмогорова-Смирнова:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, <span class="st">"pnorm"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -274,7 +274,7 @@ D = 0.019416, p-value = 0.8452
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
-<p>Полученный результат p-value &gt; <span class="math inline">\(a\)</span>, а значит основную гипотезу о нормальности распределения не отвергаем. Как было сказано ранее, тест Колмогорова-Смирнова слишком строгий, например, если мы зададим иной <code>set.seed</code>, то Шапиро-Уилка все еще не отвергнет гипотезу о нормальном распределении, а вот тест Колмогорова-Смирнова уже отвергнет нулевую гипотезу для <span class="math inline">\(a=0.05\)</span>:</p>
+<p>Полученный результат p-value &gt; <span class="math inline">\(\alpha\)</span>, а значит основную гипотезу о нормальности распределения не отвергаем. Как было сказано ранее, тест Колмогорова-Смирнова слишком строгий, например, если мы зададим иной <code>set.seed</code>, то Шапиро-Уилка все еще не отвергнет гипотезу о нормальном распределении, а вот тест Колмогорова-Смирнова уже отвергнет нулевую гипотезу для <span class="math inline">\(\alpha=0.05\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">145</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
@@ -391,7 +391,7 @@ W = 0.97026, p-value = 0.5065</code></pre>
 </div>
 </div>
 </div>
-<p>Уже визуально видно, что распределение колонки <code>variable</code> имеет ненормальный вид. Видно, что оно состоит из двух колоколообразных распределений. Тем не менее, проверим тестом Шапиро-Уилка (<span class="math inline">\(a=0.5\)</span>), чтобы окончательно убедиться в отсутствии нормальности распределения:</p>
+<p>Уже визуально видно, что распределение колонки <code>variable</code> имеет ненормальный вид. Видно, что оно состоит из двух колоколообразных распределений. Тем не менее, проверим тестом Шапиро-Уилка (<span class="math inline">\(\alpha=0.5\)</span>), чтобы окончательно убедиться в отсутствии нормальности распределения:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df_new<span class="sc">$</span>variable)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -402,7 +402,7 @@ data:  df_new$variable
 W = 0.96285, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Действительно, p-value &lt; <span class="math inline">\(a\)</span>, а значит отвергаем гипотезу о нормальности распределения.</p>
+<p>Действительно, p-value &lt; <span class="math inline">\(\alpha\)</span>, а значит отвергаем гипотезу о нормальности распределения.</p>
 <p>Конечно, наш пример искусственный, так что мы уже знаем, на какие две выборки должна быть разделена переменная, визуализируем с помощью пакета <code>ggplot2</code>, построим ядерную оценку плотности распределения <code>variable</code> и цветом укажем наблюдения, относящиеся к значениям <code>x</code> и <code>y</code> из переменной <code>group</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -418,7 +418,7 @@ W = 0.96285, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Таким образом, указав цветом группу, мы увидели, что в нашей переменной содержатся два разных распределения, имеющие, вероятно, нормальный вид.</p>
-<p>Проверим каждую группу с помощью теста Шапиро-Уилка (<span class="math inline">\(a = 0.5\)</span>):</p>
+<p>Проверим каждую группу с помощью теста Шапиро-Уилка (<span class="math inline">\(\alpha = 0.5\)</span>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># в квадратных скобках указываем, какие именно значения используем</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(df_new<span class="sc">$</span>variable[df_new<span class="sc">$</span>group<span class="sc">==</span><span class="st">"x"</span>])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -438,7 +438,7 @@ data:  df_new$variable[df_new$group == "y"]
 W = 0.99728, p-value = 0.09025</code></pre>
 </div>
 </div>
-<p>Тест Шапиро-Уилка показал, что основаня гипотеза о нормальном распределении не отвергается как для x, так и для y, так как p-value &gt; <span class="math inline">\(a\)</span>.</p>
+<p>Тест Шапиро-Уилка показал, что основаня гипотеза о нормальном распределении не отвергается как для x, так и для y, так как p-value &gt; <span class="math inline">\(\alpha\)</span>.</p>
 
 
 </section>

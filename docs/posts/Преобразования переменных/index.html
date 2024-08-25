@@ -193,7 +193,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Дата публикации</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">19 августа 2024 г.</p>
+        <p class="date">22 августа 2024 г.</p>
       </div>
     </div>
     
@@ -228,42 +228,42 @@ window.Quarto = {
 <caption>Таблица значений трансформаций</caption>
 <colgroup>
 <col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 80%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>λ</th>
-<th>Трансформация</th>
+<th style="text-align: center;">λ</th>
+<th style="text-align: center;">Трансформация</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>-2</td>
-<td>1/x^2</td>
+<td style="text-align: center;">-2</td>
+<td style="text-align: center;">1/x^2</td>
 </tr>
 <tr class="even">
-<td>-1</td>
-<td>1/x</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">1/x</td>
 </tr>
 <tr class="odd">
-<td>-0.5</td>
-<td>1/x^0.5</td>
+<td style="text-align: center;">-0.5</td>
+<td style="text-align: center;">1/x^0.5</td>
 </tr>
 <tr class="even">
-<td>0</td>
-<td>log(x)</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">log(x)</td>
 </tr>
 <tr class="odd">
-<td>0.5</td>
-<td>x^0.5</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">x^0.5</td>
 </tr>
 <tr class="even">
-<td>1</td>
-<td>x</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">x</td>
 </tr>
 <tr class="odd">
-<td>2</td>
-<td>x^2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">x^2</td>
 </tr>
 </tbody>
 </table>
@@ -350,7 +350,7 @@ data:  df$new_disp
 W = 0.93766, p-value = 0.06426</code></pre>
 </div>
 </div>
-<p>Как итог, при преобразовании переменной <code>disp</code> основная гипотеза о нормальном распределении не отвергается, так как <span class="math inline">\(p-value &gt; 0.05\)</span>, при этом наибольшее <span class="math inline">\(p-value\)</span> получилось при использовании точной лямбды.</p>
+<p>Как итог, при преобразовании переменной <code>disp</code> основная гипотеза о нормальном распределении не отвергается, так как p-value &gt; <span class="math inline">\(0.05\)</span>, при этом наибольшее p-value получилось при использовании точной лямбды.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -369,17 +369,17 @@ W = 0.93766, p-value = 0.06426</code></pre>
 <section id="о-логарифмическом-преобразовании-переменных" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> О логарифмическом преобразовании переменных</h1>
 <p>Итак, мы уже выяснили, что логарифм позволяет приблизить распределение переменной к нормальному виду, а в случае построения линейной модели - приблизить ее к линейности. Логарифм особенно актуален для линейных моделей, его довольно легко проинтерпретировать, для этого нужно более детально посмотреть на математические основы регрессии:</p>
-<p><span class="math display">\[y_1 = b_0 + b_1*x1\]</span></p>
-<p><span class="math display">\[y_2 = b_0 + b_1*x2\]</span></p>
+<p><span class="math display">\[y_1 = b_0 + b_1\cdot x1\]</span></p>
+<p><span class="math display">\[y_2 = b_0 + b_1\cdot x2\]</span></p>
 <p>Будем считать, что <span class="math inline">\(x_2 &gt; x_1\)</span>, то есть <span class="math inline">\(x_2\)</span> это следующее значение на единицу больше. Как увеличилось значение зависимой переменной? Решаем уравнение: <span class="math inline">\(y_2-y_1= b_1(x_2-x_1)\)</span>, различие между <span class="math inline">\(x_2\)</span> и <span class="math inline">\(x_1\)</span> равняется 1 (<span class="math inline">\(\Delta = 1\)</span>).</p>
 <p>Теперь перейдем к интерпретации логарифма:</p>
-<p><span class="math display">\[log(y_1) = b_0 + b_1*log(x1)\]</span></p>
-<p><span class="math display">\[log(y_2) = b_0 + b_1*log(x2)\]</span></p>
-<p>Будем всё так же считать, что <span class="math inline">\(x_2 &gt; x_1\)</span>. Как же теперь увеличится значение зависимой переменной? Решим похожее уравнение, как решали до этого: <span class="math inline">\(log(y_2)-log(y_1)=b_1(log(x_2)-log(x_1))\)</span>, из этого получается, что <span class="math inline">\(log(\frac{y_2}{y_1})=b_1*log(\frac{x_2}{x_1})\)</span>, после чего перенесём <span class="math inline">\(b_1\)</span> в степень и получим <span class="math inline">\(log(\frac{y_2}{y_1})=log(\frac{x_2}{x_1})^{b_1}\)</span>. Конечное решение приводит к <span class="math inline">\(\frac{y_2}{y_1} = (\frac{x_2}{x_1})^{b_1}\)</span>!</p>
+<p><span class="math display">\[log(y_1) = b_0 + b_1\cdot log(x1)\]</span></p>
+<p><span class="math display">\[log(y_2) = b_0 + b_1\cdot log(x2)\]</span></p>
+<p>Будем всё так же считать, что <span class="math inline">\(x_2 &gt; x_1\)</span>. Как же теперь увеличится значение зависимой переменной? Решим похожее уравнение, как решали до этого: <span class="math inline">\(log(y_2)-log(y_1)=b_1(log(x_2)-log(x_1))\)</span>, из этого получается, что <span class="math inline">\(log(\frac{y_2}{y_1})=b_1\cdot log(\frac{x_2}{x_1})\)</span>, после чего перенесём <span class="math inline">\(b_1\)</span> в степень и получим <span class="math inline">\(log(\frac{y_2}{y_1})=log(\frac{x_2}{x_1})^{b_1}\)</span>. Конечное решение приводит к <span class="math inline">\(\frac{y_2}{y_1} = (\frac{x_2}{x_1})^{b_1}\)</span>!</p>
 <p>Таким образом, оказывается, что коэффициент <span class="math inline">\(b_1\)</span> в регрессии, где у нас трансформирована зависимая и независимая переменная как натуральный логарифм, показывает, насколько процентов увеличится значение зависимой переменной, при условии, что предиктор увеличится на 1%!</p>
 <p>Пример доказательства:</p>
 <p>мы имеем переменную <span class="math inline">\(x\)</span> с диапазоном значений <span class="math inline">\([0; 200]\)</span></p>
-<p>регрессионное уравнение выглядит следующим образом: <span class="math inline">\(log(y) = b_0 + 3*log(x)\)</span></p>
+<p>регрессионное уравнение выглядит следующим образом: <span class="math inline">\(log(y) = b_0 + 3\cdot log(x)\)</span></p>
 <p>нам нужно узнать, как изменится <span class="math inline">\(y\)</span>, если <span class="math inline">\(x\)</span> изменится на 1%, то есть: <span class="math display">\[x_1 = 100\]</span></p>
 <p><span class="math display">\[x_2 = 101\]</span>.</p>
 <p><span class="math inline">\(\frac{y_2}{y_1} = (\frac{x_2}{x_1})^{b_1} = (\frac{101}{100})^3\)</span></p>
@@ -428,21 +428,21 @@ W = 0.93766, p-value = 0.06426</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Формула</th>
+<th style="text-align: center;">Формула</th>
 <th>Интерпретация</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>lm(log(y)~log(x), df)</td>
+<td style="text-align: center;">lm(log(y)~log(x), df)</td>
 <td>при единичном увеличении предиктора x на 1%, зависимая переменная y увеличивается на 0.5%</td>
 </tr>
 <tr class="even">
-<td>lm(y~log(x), df)</td>
+<td style="text-align: center;">lm(y~log(x), df)</td>
 <td>при единичном увеличении предиктора x на 1%, зависимая переменная y увеличивается на 0.5</td>
 </tr>
 <tr class="odd">
-<td>lm(log(y)~x, df)</td>
+<td style="text-align: center;">lm(log(y)~x, df)</td>
 <td>при единичном увеличении предиктора x, зависимая переменная y увеличивается на 0.5%</td>
 </tr>
 </tbody>
