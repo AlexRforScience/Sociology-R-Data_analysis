@@ -9,7 +9,7 @@ execute:
   warning: false
   message: fals
 date: 09.05.2024
-categories: [Статистика]
+categories: [Визуализация]
 lang: ru
 ---
 
