@@ -8,7 +8,7 @@ crossref:
 execute: 
   warning: false
   message: fals
-date: 08.16.2024
+date: 09.05.2024
 categories: [Статистика]
 lang: ru
 ---
@@ -52,7 +52,7 @@ word_freq <- sort(rowSums(hse_dtm), decreasing = T)
 word_freq_df <- data.frame(word = names(word_freq), freq = word_freq)
 # само облако слов
 wordcloud2(word_freq_df, color = "random-light", backgroundColor = "black",
-           size = 0.6)
+           size = 0.8)
 ```
 
 
