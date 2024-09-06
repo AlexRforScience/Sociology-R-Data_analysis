@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Мелихов Александр">
 
-<title>Статистика, R и социология</title>
+<title>Untitled – Статистика, R и социология</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -58,86 +55,38 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "Поиск не дал результатов",
-    "search-matching-documents-text": "Результаты поиска",
-    "search-copy-link-title": "Скопировать ссылку",
-    "search-hide-matches-text": "Скрыть дополнительные результаты",
-    "search-more-match-text": "дополнительный результат в этом документе",
-    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
-    "search-clear-button-title": "Очистить",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Отменить",
-    "search-submit-button-title": "Найти",
-    "search-label": "Поиск"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
-<script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
+<link href="site_libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
+<script src="site_libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
 
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+<script src="site_libs/wordcloud2-0.0.1/hover.js"></script>
 
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
+<script src="site_libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -145,8 +94,8 @@ window.Quarto = {
     <span class="navbar-title">Статистика, R и социология</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Поиск"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Переключить навигацию" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -168,298 +117,60 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Переключить темный режим"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Статистика, R и социология</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      <div>
-      <div class="quarto-title-meta-heading">Автор</div>
-      <div class="quarto-title-meta-contents">
-               <p>Мелихов Александр </p>
-            </div>
-    </div>
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Категории</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">Все <span class="quarto-category-count">(8)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Статистика">Статистика <span class="quarto-category-count">(7)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Untitled</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<section id="example1" class="level1">
+<h1>Example1</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-e7f174a87e4600bd1f1a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e7f174a87e4600bd1f1a">{"x":{"word":["Привет","мир","слово","облако","слово","сделал","пожалуйста","R","wordcloud2","используя","частота"],"freq":[5,4,3,3,2,2,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":54,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+</div>
+</div>
+</section>
+<section id="example2" class="level1">
+<h1>Example2</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-108ed67fe8a33063b518" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-108ed67fe8a33063b518">{"x":{"word":["Привет","мир","слово","облако","слово","сделал","пожалуйста","R","wordcloud2","используя","частота"],"freq":[5,4,3,3,2,2,1,1,1,1,1],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":54,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+</div>
+</div>
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Статистика" data-listing-date-sort="1724533200000" data-listing-file-modified-sort="1724580781749" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1403">
-<div class="thumbnail">
-<p><a href="./posts/Сравнение центров распределений/index.html" class="no-external"></a></p><a href="./posts/Сравнение центров распределений/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Сравнение центров распределений/photo_2024-08-24_19-48-48.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Сравнение центров распределений/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external">Сравнение цетров распределений</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external">Центр распределения — то одно единственное число, которое описывало, характеризовало бы выборку. Подробнее о данной теме расписано в посте о мерах центральной тенденции.…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Сравнение центров распределений/index.html" class="no-external">
-<div class="listing-date">
-25 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Статистика" data-listing-date-sort="1724360400000" data-listing-file-modified-sort="1724580781540" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="714">
-<div class="thumbnail">
-<p><a href="./posts/Проверка на нормальность распределения/index.html" class="no-external"></a></p><a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Проверка на нормальность распределения/DbnOZavW0AAav2J-1024x876.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/Проверка на нормальность распределения/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">Проверка на нормальность распределения</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">Мы можем проверить гипотезу о нормальности распределения с помощью разных тестов, но обычно используют два основных статистических теста - Шапиро-Уилка и более строгий тест…<span class="math inline"></span></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Проверка на нормальность распределения/index.html" class="no-external">
-<div class="listing-date">
-23 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Статистика" data-listing-date-sort="1724274000000" data-listing-file-modified-sort="1724622317122" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1074">
-<div class="thumbnail">
-<p><a href="./posts/Преобразования переменных/index.html" class="no-external"></a></p><a href="./posts/Преобразования переменных/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Преобразования переменных/Слайд1.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Преобразования переменных/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Преобразования переменных/index.html" class="no-external">Преобразование переменных</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Преобразования переменных/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Преобразования переменных/index.html" class="no-external">Одним из решений может служить использование семейства преобразований Бокса-Кокса (Box-Cox). Данное семейство реализовано функцией <code>boxcox</code> из пакета “MASS”. Оно позволяет…<code></code><code></code><span class="math inline"></span></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Преобразования переменных/index.html" class="no-external">
-<div class="listing-date">
-22 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Статистика" data-listing-date-sort="1724014800000" data-listing-file-modified-sort="1724580781503" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1148">
-<div class="thumbnail">
-<p><a href="./posts/Статистические гипотезы/index.html" class="no-external"></a></p><a href="./posts/Статистические гипотезы/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Статистические гипотезы/TypeITypeIIErrors1.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Статистические гипотезы/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external">Статистические гипотезы</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external"><span class="math inline">\(H_0\)</span> - основная гипотеза.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Статистические гипотезы/index.html" class="no-external">
-<div class="listing-date">
-19 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Статистика" data-listing-date-sort="1723755600000" data-listing-file-modified-sort="1724365168946" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1540">
-<div class="thumbnail">
-<p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a></p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Нахождение меры центральной тенденции/photo_2024-08-07_13-29-15.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">Мера центральной тенденции</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">Если мы собираемся проводить количественное исследование, то одним из неотъемлемых методов анализа данных является поиск меры центральной тенденции изучаемого признака.…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Нахождение меры центральной тенденции/index.html" class="no-external">
-<div class="listing-date">
-16 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="Статистика" data-listing-date-sort="1723755600000" data-listing-file-modified-sort="1725624150466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="223">
-<div class="thumbnail">
-<p><a href="./posts/Облако/index.html" class="no-external"></a></p><a href="./posts/Облако/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Облако/photo_2024-09-06_03-58-12.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/Облако/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Облако/index.html" class="no-external">Облако слов названий ВКР социологии</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Облако/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Облако/index.html" class="no-external">Я сделал это еще летом, но так и не опубликовал. Я мог бы конечно просто выложить картинку в тг канал, однако я все же хочу сохранить интерактивные функции пакета…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Облако/index.html" class="no-external">
-<div class="listing-date">
-16 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="Статистика" data-listing-date-sort="1723755600000" data-listing-file-modified-sort="1725625029855" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="159">
-<div class="thumbnail">
-<p><a href="./posts/Облако2/index.html" class="no-external"></a></p><a href="./posts/Облако2/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/Облако2/unnamed.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/Облако2/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Облако2/index.html" class="no-external">Облако слов аннтотаций ВКР социологии</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/Облако2/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Статистика'); return false;">
-Статистика
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/Облако2/index.html" class="no-external">Давайте посмотрим на облако слов по аннотациям:</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/Облако2/index.html" class="no-external">
-<div class="listing-date">
-16 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="Quarto" data-listing-date-sort="1723237200000" data-listing-file-modified-sort="1725625259563" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1284">
-<div class="thumbnail">
-<p><a href="./posts/My new post/index.html" class="no-external"></a></p><a href="./posts/My new post/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/My new post/photo_2024-08-30_01-02-40.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/My new post/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/My new post/index.html" class="no-external">Введение в азы Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/My new post/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Quarto'); return false;">
-Quarto
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/My new post/index.html" class="no-external">В Markdown не очень удобно вручную создавать таблицу, так что воспользуемся возможностями Visual в верхней панеле Rstudio</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/My new post/index.html" class="no-external">
-<div class="listing-date">
-10 авг. 2024 г.
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-Нет подходящих элементов
-</div>
-</div></main> <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -647,12 +358,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано");
+    button.setAttribute("title", "Copied!");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано");
+      button.setAttribute("data-bs-title", "Copied!");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",

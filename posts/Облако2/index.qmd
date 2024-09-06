@@ -1,0 +1,55 @@
+---
+title: "Облако слов аннтотаций ВКР социологии"
+image: unnamed.png
+toc: true
+number-sections: true
+crossref:
+  chapters: false
+execute: 
+  warning: false
+  message: fals
+date: 08.16.2024
+categories: [Статистика]
+lang: ru
+---
+
+Давайте посмотрим на облако слов по аннотациям:
+
+```{r echo=FALSE}
+#| fig-asp: 1
+#| fig-height: 10
+#| fig-wight: 15
+library(data.table)
+library(wordcloud2)
+library(tm)
+library(NLP)
+library(udpipe)
+library(readxl)
+setwd("C:/R/Work_in_R")
+
+ВКР_СОЦ <- read_excel("ВКР_СОЦ.xlsx")
+hse <- as.data.table(ВКР_СОЦ) # перевод ее в data.table
+# удаление косяка, который я допустил в коде web scrapping
+
+hse1 <- hse[, 5] # далее мы работаем только с названиями
+hse1 <- paste(hse1$annotation, collapse = " ") # превратили всё из колонки в один текст (так удобнее)
+dl <- udpipe_download_model(language = "russian") # устанавливаем русский язык 
+udmodel_ru <- udpipe_load_model(file = dl$file_model)
+x <- udpipe_annotate(udmodel_ru, x = hse1)  
+x <- as.data.frame(x) # теперь у нас есть лемматизация слов
+hse1 <- paste(x$lemma, collapse = " ")
+stopwords_file <- readLines("stopwords-ru.txt", encoding = "UTF-8") # находим файл стоп слов и грузим
+# далее мы переводим весь текст в формат для облака слов
+hse_corpus <- Corpus(VectorSource(hse1))
+hse_corpus <- tm_map(hse_corpus, content_transformer(tolower))
+hse_corpus <- tm_map(hse_corpus, content_transformer(removePunctuation))
+hse_corpus <- tm_map(hse_corpus, content_transformer(removeNumbers))
+hse_corpus <- tm_map(hse_corpus, removeWords, stopwords_file)
+hse_dtm <- TermDocumentMatrix(hse_corpus)
+hse_dtm <- as.matrix(hse_dtm)
+word_freq <- sort(rowSums(hse_dtm), decreasing = T)
+word_freq_df <- data.frame(word = names(word_freq), freq = word_freq)
+# само облако слов
+wordcloud2(word_freq_df, color = "random-light", backgroundColor = "black",
+           size = 0.8)
+```
